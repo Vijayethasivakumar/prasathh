@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Prasath ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* COMMON SCREEN STYLE */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    transition: opacity 0.8s ease;
+    text-align: center;
+}
+
+/* PAGE COLORS */
+#s1 {
+    background: linear-gradient(135deg, #ff5f8f, #ff9a9e);
+}
+
+#s2 {
+    background: linear-gradient(135deg, #b24592, #f15f79);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#s3 {
+    background: url("cupid2.png") center/cover no-repeat;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* TEXT */
+h1 {
+    font-size: 64px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 20px;
+}
+
+/* OVERLAY FOR PAGE 3 */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+}
+
+/* CONTENT PAGE 3 */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    animation: fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* FLOATING HEARTS */
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.8);
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0%   { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    50%  { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+/* BIG CUPID */
+#cupid {
+    font-size: 130px;
+    margin-top: 25px;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.8s ease;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="screen" id="s1" onclick="go2()">
+    <h1>HEY PRASATH ❤️</h1>
+    <p>(tap here)</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="screen" id="s2" onclick="go3()">
+    <h2>Your wife has again a surprise for you 💕</h2>
+    <p>Tap to continue…🎯</p>
+    <div id="cupid">🏹💘</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="screen" id="s3">
+    <div class="overlay"></div>
+    <div class="content">
+        <h2>Happy Propose Day 💍</h2>
+        <p>Will you choose me, every day, forever? ❤️</p>
+    </div>
+</div>
+
+<script>
+/* CREATE FLOATING HEARTS */
+function createHearts(count) {
+    for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+        heart.style.fontSize = (15 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
+    }
+}
+createHearts(25);
+
+/* PAGE NAVIGATION */
+function go2() {
+    document.getElementById("s1").style.opacity = 0;
+
+    setTimeout(() => {
+        document.getElementById("s1").style.display = "none";
+        const s2 = document.getElementById("s2");
+        s2.style.opacity = 1;
+        s2.style.pointerEvents = "auto";
+
+        // Show big cupid AFTER message
+        setTimeout(() => {
+            const cupid = document.getElementById("cupid");
+            cupid.style.opacity = 1;
+            cupid.style.transform = "scale(1)";
+        }, 800);
+
+    }, 700);
+}
+
+function go3() {
+    document.getElementById("music").play();
+    document.getElementById("s2").style.opacity = 0;
+
+    setTimeout(() => {
+        document.getElementById("s2").style.display = "none";
+        const s3 = document.getElementById("s3");
+        s3.style.opacity = 1;
+        s3.style.pointerEvents = "auto";
+
+        // Heart explosion on final page
+        createHearts(400);
+    }, 700);
+}
+</script>
+
+</body>
+</html>
